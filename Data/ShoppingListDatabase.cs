@@ -40,14 +40,21 @@ namespace Crisan_Ioana_Narcisa_Lab7.Data
             return _database.Table<Product>().ToListAsync();
         }
 
-        internal Task DeleteShopListAsync(ShopList slist)
+        public Task<int> DeleteShopListAsync(ShopList slist)
         {
-            throw new NotImplementedException();
+            return _database.DeleteAsync(slist);
         }
 
-        internal Task SaveShopListAsync(ShopList slist)
+        public Task<int> SaveShopListAsync(ShopList slist)
         {
-            throw new NotImplementedException();
+            if (slist.ID != 0)
+            {
+                return _database.UpdateAsync(slist);
+            }
+            else
+            {
+                return _database.InsertAsync(slist);
+            }
         }
 
         public Task<int> SaveListProductAsync(ListProduct listp)
@@ -70,9 +77,9 @@ namespace Crisan_Ioana_Narcisa_Lab7.Data
             shoplistid);
         }
 
-        internal Task<IEnumerable> GetShopListsAsync()
+        public Task<List<ShopList>> GetShopListsAsync()
         {
-            throw new NotImplementedException();
+            return _database.Table<ShopList>().ToListAsync();
         }
     }
 
